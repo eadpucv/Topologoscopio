@@ -8,10 +8,8 @@
 import muthesius.net.*;
 import org.webbitserver.*;
 import de.bezier.data.sql.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import ddf.minim.*;
+
 Minim minim;
 AudioInput in;
 
