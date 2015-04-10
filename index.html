@@ -1,46 +1,46 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<!-- para evitar tener que dar acceso al micrófono de forma contínua se recomienda correr esta página bajo HTTPS -->
     <script type="text/javascript">
 
-        // We need to check if the browser supports WebSockets
+        // Necesitamos asegurarnos que el navegador utilice Websocket
 
         if ("WebSocket" in window) {
 
-            // Before we can connect to the WebSocket, we need to start it in Processing.
-            // Example using WebSocketP5
-            // http://github.com/muthesius/WebSocketP5
+            // Antes de conectarnos al Websocket, debemos comenzarlo desde Processing
 
             var ws = new WebSocket("ws://localhost:8080/p5websocket");
         } else {
 
-            // The browser doesn't support WebSocket
+            // El navegador no sporta websocket
 
             alert("WebSocket NOT supported by your Browser!");
         }
 
-        // Now we can start the speech recognition
-        // Supported only in Chrome
-        // Once started, you need to allow Chrome to use the microphone
+        // Ahora podemos comenzar el reconocimiento de voz
+        // Sólo soportado por Google Chrome
+        // Una vez que comienza, debes autorizar el acceso al micrófono
 
         var recognition = new webkitSpeechRecognition();
 
-        // Be default, Chrome will only return a single result.
-        // By enabling "continuous", Chrome will keep the microphone active.
+        // De forma predeterminada, Google retorna solo 1 resultado
+        // La forma continua mantiene el micrófono abierto
 
         recognition.continuous = true;
         // recognition.interimResults = true;
 
         recognition.onresult = function(event) {
 
-            // Get the current result from the results object
+            // Obtén el resultado a partir del objeto generado por la API
             var transcript = event.results[event.results.length-1][0].transcript;
 
-            // Send the result string via WebSocket to the running Processing Sketch
+            // Envía el resultado a Processing
             ws.send(transcript);
 
+            // renderiza el resultado en esta página
             var d = document.getElementById("speech");
-                d.textContent += transcript;
+                d.textContent += " ~ "+transcript;
             
         }
 
@@ -51,7 +51,8 @@
             recognition.start();
         }
 
-        // Start the recognition
+        // Comienza a reconocer
+        recognition.lang = 'ES';
         recognition.start();
 
 </script>

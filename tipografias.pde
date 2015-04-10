@@ -1,13 +1,14 @@
 void printVoice() {
   for (int i = 0; i < texts.length; i++) {
     I[i].update();
-    text(texts[i], margin, I[i].value, width - 2 * margin - fontSize);
+    float gray = map(I[i].value, height * .7, 0, 255, 0);
+    fill(gray);
+    text(texts[i], margin, I[i].value, textWidth);
   }
 }
 
 
 public String createLineBreaks(String str, float maxWidth) {
-
   // Remove unnecessary spaces
   // and add (unix) linebreak characters if line length exceeds maxWidth
   StringBuilder strBuffer = new StringBuilder(str.length());
@@ -52,7 +53,6 @@ public float textLeading() {
 }
 
 public float textHeight(String str) {
-
   // Count (unix) linebreaks
   int linebreaks = 0;
   for (int i = 0, n = str.length (); i < n; i++)
