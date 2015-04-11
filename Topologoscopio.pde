@@ -110,13 +110,13 @@ void websocketOnClosed(WebSocketConnection con) {
 
 void drawAudio() {
   stroke(255, 100);
-  
-  float amp = 500;
+  float ypos = height - 60;
+  float amp = 400;
   pushMatrix();
   scale(2, 1);
   for (int i = 0; i < in.bufferSize () - 1; i++) {
-    line( i, height - 50 - in.left.get(i)*amp, i+1,  height - 50 - in.left.get(i+1)*amp  );
-    line( i, height - 47 - in.right.get(i)*amp, i+1, height - 47 - in.right.get(i+1)*amp );
+    line( i, ypos - in.left.get(i)*amp, i+1,  ypos - in.left.get(i+1)*amp  );
+    // line( i, ypos - 5 - in.right.get(i)*amp, i+1, ypos - 5 - in.right.get(i+1)*amp );
   }
   popMatrix();
 }
