@@ -36,7 +36,7 @@ void setup() {
   String pass     = "";
   String database = "topologoscopio";
   db = new MySQL( this, "127.0.0.1", database, user, pass);
-
+  noCursor();
   fontSize = 72;
   margin = 100;
 
