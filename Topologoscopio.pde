@@ -15,6 +15,7 @@ AudioInput in;
 
 WebSocketP5 socket;  // la conexión con Webkit y la API de Google
 MySQL db;            // la base de datos
+color c;
 
 PFont font;
 
@@ -39,6 +40,7 @@ void setup() {
   String database = "topologoscopio";
   db = new MySQL( this, "127.0.0.1", database, user, pass);
   
+  c = #FAF9ED;
   noCursor();
   fontSize = 72;
   margin = 100;
@@ -54,9 +56,9 @@ void setup() {
   heights = new float[lines];
   I = new Integrator[lines];
 
-  // inicializa los textos con "..."
+  // inicializa los textos con números
   for (int i = 0; i < lines; i++) {
-    String a = ""+i+"). ...";
+    String a = ""+i+").";
     texts[i] = a;
     heights[i] = lowerMargin - ((textHeight(a)+textLeading()) * (lines - i));
     I[i] = new Integrator(height*2);
@@ -116,7 +118,6 @@ void websocketOnClosed(WebSocketConnection con) {
 
 // dibuja las barras de monitoreo de audio
 void drawAudio() {
-  float gray;
   float st = 5;
   strokeWeight(st);
   float ypos = height;
@@ -124,8 +125,8 @@ void drawAudio() {
   pushMatrix();
   scale(2, 1);
   for (int i = 0; i < in.bufferSize (); i+=(st)) {
-    gray = 100 + in.left.get(i) * 155;
-    stroke(255, gray);
+    // gray = 100 + in.left.get(i) * 155;
+    stroke(c, 100);
     line( i, height, i, ypos - in.left.get(i)*amp);
     // line( i, ypos - 5 - in.right.get(i)*amp, i+1, ypos - 5 - in.right.get(i+1)*amp );
   }
