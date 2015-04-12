@@ -16,7 +16,7 @@ AudioInput in;
 WebSocketP5 socket;  // la conexión con Webkit y la API de Google
 MySQL db;            // la base de datos
 
-PFont font, mono;
+PFont font;
 
 String[] texts;      // los textos en pantalla
 float[] heights;     // las heights de los textos en pantalla
@@ -32,17 +32,19 @@ int newLine;  // corresponde al índice de la newLine línea de texto que ingres
 void setup() {
   size(displayWidth, displayHeight, P3D);
   socket = new WebSocketP5(this, 8080);
+  
+  // datos de conexión con la BBDD local
   String user     = "root";
   String pass     = "";
   String database = "topologoscopio";
   db = new MySQL( this, "127.0.0.1", database, user, pass);
+  
   noCursor();
   fontSize = 72;
   margin = 100;
 
   textWidth = width - 2 * margin;
   font = loadFont("DINCondensed-Bold-72.vlw");
-  mono = loadFont("Monaco-12.vlw");
   textFont(font, fontSize);
   fontHeight = textAscent()+textDescent();
   textLeading(fontHeight);
@@ -52,8 +54,9 @@ void setup() {
   heights = new float[lines];
   I = new Integrator[lines];
 
+  // inicializa los textos con "..."
   for (int i = 0; i < lines; i++) {
-    String a = "...";
+    String a = ""+i+"). ...";
     texts[i] = a;
     heights[i] = lowerMargin - ((textHeight(a)+textLeading()) * (lines - i));
     I[i] = new Integrator(height*2);
@@ -81,21 +84,24 @@ void websocketOnMessage(WebSocketConnection con, String msg) {
   if (db.connect()) {
     db.query("INSERT INTO speech(utterance) VALUES('"+msg+"')");
   } else {
-    println("la conexión con la base de datos no pudo realizarse");
+    println("no se puede conectar a la base de datos");
   }
 
-  println(msg);
+  // println(msg);
   String t = createLineBreaks(msg, textWidth);
 
   texts[newLine] = msg;
   I[newLine].set(height*2);
   heights[newLine] = textHeight(t);
 
+  // corre los textos hacia arriba al ingresar un texto nuevo
   for (int i = 0; i < lines; i++) {
     if (i != newLine) {
       I[i].target -= heights[newLine];
     }
   }
+  
+  // anima el ingreso del nuevo texto
   I[newLine].target = lowerMargin - heights[newLine];
   newLine = (newLine + 1) % lines;
 }
@@ -108,14 +114,19 @@ void websocketOnClosed(WebSocketConnection con) {
   println("un cliente se ha ido");
 }
 
+// dibuja las barras de monitoreo de audio
 void drawAudio() {
-  stroke(255, 100);
-  float ypos = height - 60;
+  float gray;
+  float st = 5;
+  strokeWeight(st);
+  float ypos = height;
   float amp = 400;
   pushMatrix();
   scale(2, 1);
-  for (int i = 0; i < in.bufferSize () - 1; i++) {
-    line( i, ypos - in.left.get(i)*amp, i+1,  ypos - in.left.get(i+1)*amp  );
+  for (int i = 0; i < in.bufferSize (); i+=(st)) {
+    gray = 100 + in.left.get(i) * 155;
+    stroke(255, gray);
+    line( i, height, i, ypos - in.left.get(i)*amp);
     // line( i, ypos - 5 - in.right.get(i)*amp, i+1, ypos - 5 - in.right.get(i+1)*amp );
   }
   popMatrix();

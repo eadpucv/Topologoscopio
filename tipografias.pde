@@ -1,7 +1,8 @@
 void printVoice() {
   for (int i = 0; i < texts.length; i++) {
     I[i].update();
-    float gray = map(I[i].value, height * .7, 0, 255, 0);
+    // define una transparencia diferente para los textos de más arriba
+    float gray = map(I[i].value, height * .7, -100, 255, 0);
     fill(gray);
     text(texts[i], margin, I[i].value, textWidth);
   }
