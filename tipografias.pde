@@ -2,7 +2,7 @@ void printVoice() {
   for (int i = 0; i < texts.length; i++) {
     I[i].update();
     // define una transparencia diferente para los textos de más arriba
-    float alfa = map(I[i].value, height * .7, -100, 255, 0);
+    float alfa = map(I[i].value, height * .7, 0, 255, 0);
     fill(c, alfa);
     text(texts[i], margin, I[i].value, textWidth);
   }
@@ -66,4 +66,5 @@ public float textHeight(String str) {
   else
     return linebreaks * textLeading() + textAscent() + textDescent();
 }
+
 
