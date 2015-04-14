@@ -84,8 +84,6 @@ void stop() {
   socket.stop();
 }
 
-
-
 void websocketOnMessage(WebSocketConnection con, String msg) {
   m = split(msg, '+'); // divide el texto de entrada en el signo más (+)
 
