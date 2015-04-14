@@ -12,6 +12,7 @@ import ddf.minim.*;
 
 Minim minim;
 AudioInput in;
+String intermedio = "";
 
 WebSocketP5 socket;  // la conexión con Webkit y la API de Google
 MySQL db;            // la base de datos
@@ -19,27 +20,28 @@ color c;
 
 PFont font;
 
-String[] texts;      // los textos en pantalla
-float[] heights;     // las heights de los textos en pantalla
-Integrator[] I;      // las heights animadas de los textos en pantalla
+String[] texts;        // los textos en pantalla
+float[] heights;       // las heights de los textos en pantalla
+Integrator[] I;        // las heights animadas de los textos en pantalla
 
-int lines = 7;       // el largo de todos los arreglos de textos
+int lines = 16;        // el largo de todos los arreglos de textos
 
 float fontSize, textWidth, fontHeight;
 float margin, lowerMargin;
-int newLine;  // corresponde al índice de la newLine línea de texto que ingresa
+int newLine;           // corresponde al índice de la newLine línea de texto que ingresa
 
+String[] m;            // un arreglo de textos instrumental para discriminar los resultados parciales de los finales
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
   socket = new WebSocketP5(this, 8080);
-  
+
   // datos de conexión con la BBDD local
   String user     = "root";
   String pass     = "";
   String database = "topologoscopio";
   db = new MySQL( this, "127.0.0.1", database, user, pass);
-  
+
   c = #FAF9ED;
   noCursor();
   fontSize = 72;
@@ -50,15 +52,15 @@ void setup() {
   textFont(font, fontSize);
   fontHeight = textAscent()+textDescent();
   textLeading(fontHeight);
-  lowerMargin = height - margin;
+  lowerMargin = height - margin * 2;
 
   texts = new String[lines];
   heights = new float[lines];
   I = new Integrator[lines];
 
-  // inicializa los textos con números
+  // inicializa los textos 
   for (int i = 0; i < lines; i++) {
-    String a = ""+i+").";
+    String a = "";
     texts[i] = a;
     heights[i] = lowerMargin - ((textHeight(a)+textLeading()) * (lines - i));
     I[i] = new Integrator(height*2);
@@ -82,30 +84,38 @@ void stop() {
   socket.stop();
 }
 
+
+
 void websocketOnMessage(WebSocketConnection con, String msg) {
-  if (db.connect()) {
-    db.query("INSERT INTO speech(utterance) VALUES('"+msg+"')");
-  } else {
-    println("no se puede conectar a la base de datos");
-  }
+  m = split(msg, '+'); // divide el texto de entrada en el signo más (+)
 
-  // println(msg);
-  String t = createLineBreaks(msg, textWidth);
+  if (m[1].charAt(0) == 't') {
+    String t = createLineBreaks(msg, textWidth);
+    texts[newLine] = m[0];
+    I[newLine].set(height*2);
+    heights[newLine] = textHeight(t);
 
-  texts[newLine] = msg;
-  I[newLine].set(height*2);
-  heights[newLine] = textHeight(t);
-
-  // corre los textos hacia arriba al ingresar un texto nuevo
-  for (int i = 0; i < lines; i++) {
-    if (i != newLine) {
-      I[i].target -= heights[newLine];
+    // corre los textos hacia arriba al ingresar un texto nuevo
+    for (int i = 0; i < lines; i++) {
+      if (i != newLine) {
+        I[i].target -= heights[newLine];
+      }
     }
+
+    // anima el ingreso del nuevo texto
+    I[newLine].target = lowerMargin - heights[newLine];
+    newLine = (newLine + 1) % lines;
+    intermedio = "";
+    
+    if (db.connect()) {
+      db.query("INSERT INTO speech(utterance) VALUES('"+m[0]+"')");
+    } else {
+      println("no se puede conectar a la base de datos");
+    }
+  } else {
+    intermedio = m[0];
   }
-  
-  // anima el ingreso del nuevo texto
-  I[newLine].target = lowerMargin - heights[newLine];
-  newLine = (newLine + 1) % lines;
+  // println(msg);
 }
 
 void websocketOnOpen(WebSocketConnection con) {

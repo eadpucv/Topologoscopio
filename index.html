@@ -28,20 +28,29 @@
         // La forma continua mantiene el micrófono abierto
 
         recognition.continuous = true;
-        // recognition.interimResults = true;
+        recognition.interimResults = true;
 
         recognition.onresult = function(event) {
 
             // Obtén el resultado a partir del objeto generado por la API
             var transcript = event.results[event.results.length-1][0].transcript;
 
-            // Envía el resultado a Processing
-            ws.send(transcript);
-
-            // renderiza el resultado en esta página
+            var isFinal = event.results[event.results.length-1].isFinal;
+            
+            var x;
+            
+            if(isFinal){
             var d = document.getElementById("speech");
                 d.textContent += " ~ "+transcript;
-            
+                x = "true";
+            }else{
+            var d = document.getElementById("intermediate");
+                d.textContent = transcript;
+                x = "false";
+            }
+
+            var newTranscript = transcript + "+" + x;
+            ws.send(newTranscript);
         }
 
         recognition.onerror = function(event) { 
@@ -65,11 +74,18 @@
         font-weight: lighter;
         text-shadow: 1px 1px 1px rgba(0,0,0,.4);
         color: #e6f7ed;
-        background: #134372;
+        background-color: #3f4264;
+    }
+    #intermediate{
+        color: black;
+        text-shadow: -1px -1px 1px rgba(255, 255, 255, .3);
+        font-size: .7em;
+        font-weight: normal;
     }
 </style>
 </head>
 <body>
+<div id='intermediate'></div>
 <div id='speech'></div>
 </body>
 </html>
