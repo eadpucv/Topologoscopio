@@ -42,6 +42,8 @@
             if(isFinal){
             var d = document.getElementById("speech");
                 d.textContent += " ~ "+transcript;
+                d = document.getElementById("intermediate");
+                d.textContent = " ";
                 x = "true";
             }else{
             var d = document.getElementById("intermediate");
@@ -70,17 +72,20 @@
     body{
         font-family: "Helvetica Neue", Helvetica;
         padding: 1em;
-        font-size: 2em;
-        font-weight: lighter;
-        text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-        color: #e6f7ed;
-        background-color: #3f4264;
+        
+        background-color: #364464;
     }
     #intermediate{
-        color: black;
-        text-shadow: -1px -1px 1px rgba(255, 255, 255, .3);
-        font-size: .7em;
-        font-weight: normal;
+        color: #222C41;
+        font-size: .9em;
+        font-weight: bold;
+    }
+
+    #speech{		
+    	font-size: 1.5em;
+        font-weight: lighter;
+        text-shadow: 1px 1px 1px #222C41;
+        color: #D9F7F5;
     }
 </style>
 </head>
