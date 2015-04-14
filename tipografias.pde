@@ -6,6 +6,8 @@ void printVoice() {
     fill(c, alfa);
     text(texts[i], margin, I[i].value, textWidth);
   }
+  fill(#FFF7D6, 110);
+  text(intermedio, margin, height-textLeading()*2, textWidth);
 }
 
 

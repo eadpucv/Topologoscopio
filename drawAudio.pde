@@ -4,7 +4,7 @@ void drawAudio() {
   float st = 5;
   strokeWeight(st);
   float ypos = height;
-  float amp = 400;
+  float amp = 200;
   pushMatrix();
   scale(2, 1);
   for (int i = 0; i < in.bufferSize (); i+=(st)) {
