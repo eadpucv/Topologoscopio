@@ -2,8 +2,9 @@
  **  Topo·Logo·Scopio
  **  por @hspencer
  **  e[ad] Escuela de Arquitectura y Diseño PUCV
+ **  Abril 2015
  **
- **/ 
+ *************************************************/
 
 import muthesius.net.*;
 import org.webbitserver.*;
@@ -15,7 +16,7 @@ AudioInput in;
 String intermedio = "";
 
 WebSocketP5 socket;  // la conexión con Webkit y la API de Google
-MySQL db;            // la base de datos
+MySQL db;              // la base de datos
 color c;
 
 PFont font;
@@ -25,10 +26,10 @@ float[] heights;       // las heights de los textos en pantalla
 Integrator[] I;        // las heights animadas de los textos en pantalla
 
 int lines = 16;        // el largo de todos los arreglos de textos
+int newLine;           // corresponde al índice de la newLine línea de texto que ingresa
 
 float fontSize, textWidth, fontHeight;
 float margin, lowerMargin;
-int newLine;           // corresponde al índice de la newLine línea de texto que ingresa
 
 String[] m;            // un arreglo de textos instrumental para discriminar los resultados parciales de los finales
 
@@ -86,25 +87,22 @@ void stop() {
 
 void websocketOnMessage(WebSocketConnection con, String msg) {
   m = split(msg, '+'); // divide el texto de entrada en el signo más (+)
-
-  if (m[1].charAt(0) == 't') {
+  if (m[1].equals("true")) {
     String t = createLineBreaks(msg, textWidth);
     texts[newLine] = m[0];
     I[newLine].set(height*2);
     heights[newLine] = textHeight(t);
-
     // corre los textos hacia arriba al ingresar un texto nuevo
     for (int i = 0; i < lines; i++) {
       if (i != newLine) {
         I[i].target -= heights[newLine];
       }
     }
-
     // anima el ingreso del nuevo texto
     I[newLine].target = lowerMargin - heights[newLine];
     newLine = (newLine + 1) % lines;
     intermedio = "";
-    
+
     if (db.connect()) {
       db.query("INSERT INTO speech(utterance) VALUES('"+m[0]+"')");
     } else {
@@ -113,7 +111,6 @@ void websocketOnMessage(WebSocketConnection con, String msg) {
   } else {
     intermedio = m[0];
   }
-  // println(msg);
 }
 
 void websocketOnOpen(WebSocketConnection con) {
