@@ -7,7 +7,7 @@ void printVoice() {
     text(texts[i], margin, I[i].value, textWidth);
   }
   fill(#FFF7D6, 110);
-  text(intermedio, margin, height-textLeading()*2, textWidth);
+  text(intermedio, margin, height-textLeading()*1.3, textWidth);
 }
 
 

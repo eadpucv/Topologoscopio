@@ -53,7 +53,7 @@ void setup() {
   textFont(font, fontSize);
   fontHeight = textAscent()+textDescent();
   textLeading(fontHeight);
-  lowerMargin = height - margin * 2;
+  lowerMargin = height - margin * 1.5;
 
   texts = new String[lines];
   heights = new float[lines];
@@ -89,13 +89,20 @@ void websocketOnMessage(WebSocketConnection con, String msg) {
   m = split(msg, '+'); // divide el texto de entrada en el signo más (+)
   if (m[1].equals("true")) {
     String t = createLineBreaks(msg, textWidth);
+    
+    // si el primer caracter es un espacio, sácaselo
+    if (m[0].charAt(0) == ' ') {
+      m[0] = m[0].substring(1);
+    }
+    
     texts[newLine] = m[0];
-    I[newLine].set(height*2);
-    heights[newLine] = textHeight(t);
+    I[newLine].set(height*2); // manda el nuevo texto muy abajo
+    heights[newLine] = textHeight(t); // define la nueva altura del texto nuevo
+
     // corre los textos hacia arriba al ingresar un texto nuevo
     for (int i = 0; i < lines; i++) {
       if (i != newLine) {
-        I[i].target -= heights[newLine];
+        I[i].target -= heights[newLine]; // a todos los textos se le resta la altura del nuevo texto
       }
     }
     // anima el ingreso del nuevo texto
