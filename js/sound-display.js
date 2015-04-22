@@ -13,8 +13,8 @@ var spaceY;
 
 function setup(){
 	createCanvas(40, displayHeight);
-	canvas.class("sound-input-display");
-	canvas.id("snd");
+	// canvas.class("sound-input-display");
+	// canvas.id("snd");
 	mic = new p5.AudioIn()
 	mic.start();
 	

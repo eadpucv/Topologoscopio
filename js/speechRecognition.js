@@ -24,11 +24,17 @@ recognition.onresult = function(event) {
         d.textContent += " · "+transcript;
         d = document.getElementById("intermediate");
         d.textContent = "";
-        /*
         
-        query("INSERT INTO speech(utterance) VALUES('"+transcript+"')");
+        $.ajax({
+            url: '../db.php', // llamamos al php
+            type: 'POST',
+            data: {data: tanscript}, // le enviamos la data en un objeto javascript
+        })
 
-        */
+        .done(function(data) {
+            if (data) //si el resultado es 1 entonces se insertó
+                console.log("Insertado");
+        })
         
     }else{
     var d = document.getElementById("intermediate");
