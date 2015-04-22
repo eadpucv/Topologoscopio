@@ -13,21 +13,7 @@
 <body>
     <div id="speech-container">
         <span id='speech'>
-            <?php
-            $servername = "127.0.0.1";
-            $username = "root";
-            $password = "";
-
-            try {
-                $conn = new PDO("mysql:host=$servername;dbname=topologoscopio", $username, $password);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo ":)"; 
-            }
-            catch(PDOException $e)
-            {
-                echo ":( " . $e->getMessage();
-            }
-            ?>
+            <h1>Topo·Logo·Scopio</h1>
         </span>
     </div>
     <span id='intermediate'></span>
