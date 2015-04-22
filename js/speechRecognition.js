@@ -1,5 +1,5 @@
 
-// Ahora podemos comenzar el reconocimiento de voz
+// Reconocimiento de voz
 // Sólo soportado por Google Chrome
 // Una vez que comienza, debes autorizar el acceso al micrófono
 
@@ -9,6 +9,8 @@ var recognition = new webkitSpeechRecognition();
 // La forma continua mantiene el micrófono abierto
 
 recognition.continuous = true;
+
+// Devolución de resultados parciales
 recognition.interimResults = true;
 
 recognition.onresult = function(event) {

@@ -9,28 +9,54 @@
 
 html{
     font-family: Oswald;
-    font-size: 2.5em;
+    font-size: 3em;
+    line-height: 95%;
     font-weight: 300;
 }
 
 body{
+    display: table-cell;
+    vertical-align: text-bottom;
+    overflow: hidden;
     padding: 1em;
     background-color: #000;
     color: #d4d6d3;
 }
-#intermediate{
+
+#speech-container{
     position: absolute;
     bottom: 2em;
-    
-}
-#speech-container{
-    display: table-cell;
-    vertical-align: text-bottom;
-    position: absolute;
-    bottom: 4em;
-    overflow: hidden;
 }
 
 #speech{
-	color: #FFF;
+    color: #FFF;
+}
+
+#intermediate{
+    position: absolute;
+    bottom: 1em;
+}
+
+#darken-overlay{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,1);
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
+}
+
+#defaultCanvas{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 200;
 }
