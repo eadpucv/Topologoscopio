@@ -5,7 +5,7 @@
 */
 
 var mic;
-var steps = 100;
+var steps = 200;
 var step = [];
 var count = 0;
 var maxDiam;
@@ -14,10 +14,10 @@ var spaceY;
 function setup(){
 	createCanvas(40, displayHeight);
 	noStroke();
-	fill(255, 200);
+	fill(221, 213, 178, 120);
 	mic = new p5.AudioIn()
 	mic.start();
-	maxDiam = width * .99;
+	maxDiam = width * 1.33;
 	spaceY = height / (steps + 1);
 	for(var i = 0; i < steps; i++){
 		step[i] = 0;

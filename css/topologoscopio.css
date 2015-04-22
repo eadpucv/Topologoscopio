@@ -25,17 +25,17 @@ body{
 
 #speech-container{
     position: absolute;
-    bottom: 2em;
+    bottom: 2.5em;
 }
 
-#speech{
-    
+#speech span{
+    margin-left: 1em;
 }
 
 #intermediate{
     position: absolute;
-    bottom: 1em;
-    color: #DBCAB4;
+    bottom: 1.5em;
+    color: #ddd5b2;
 }
 
 #darken-overlay{
