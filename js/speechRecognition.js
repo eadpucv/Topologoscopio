@@ -20,10 +20,15 @@ recognition.onresult = function(event) {
     var isFinal = event.results[event.results.length-1].isFinal;
     
     if(isFinal){
-    var d = document.getElementById("speech");
-        d.textContent += " · "+transcript;
-        d = document.getElementById("intermediate");
-        d.textContent = "";
+        var d = document.getElementById("speech");
+
+        var node = document.createElement("span");                 
+        var textnode = document.createTextNode(transcript);         
+        node.appendChild(textnode);                             
+        d.appendChild(node); 
+        
+        var interim = document.getElementById("intermediate");
+        interim.textContent = "";
         
         $.ajax({
             url: 'db.php', // llamamos al php
@@ -37,8 +42,8 @@ recognition.onresult = function(event) {
         })
         
     }else{
-    var d = document.getElementById("intermediate");
-        d.textContent = transcript;
+        var interim = document.getElementById("intermediate");
+        interim.textContent = transcript;
         
     }
 }

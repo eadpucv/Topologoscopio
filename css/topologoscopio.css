@@ -15,7 +15,7 @@ html{
 }
 
 body{
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: text-bottom;
     overflow: hidden;
     padding: 1em;
@@ -54,15 +54,12 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
 }
 
-#snd{
+#defaultCanvas,
+.snd{
     position: absolute;
     left: 0;
     bottom: 0;
     z-index: 200;
-}
-
-loadingdiv{
-    display: none;
 }
 
 h1{
