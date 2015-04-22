@@ -26,9 +26,9 @@ recognition.onresult = function(event) {
         d.textContent = "";
         
         $.ajax({
-            url: '../db.php', // llamamos al php
+            url: 'db.php', // llamamos al php
             type: 'POST',
-            data: {data: tanscript}, // le enviamos la data en un objeto javascript
+            data: {data: transcript}, // le enviamos la data en un objeto javascript
         })
 
         .done(function(data) {
@@ -41,9 +41,6 @@ recognition.onresult = function(event) {
         d.textContent = transcript;
         
     }
-
-    var newTranscript = transcript + "+" + x;
-    // ws.send(newTranscript);
 }
 
 recognition.onerror = function(event) { 

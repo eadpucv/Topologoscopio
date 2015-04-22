@@ -28,9 +28,10 @@ function setup(){
 
 function draw(){
 	background(0);
-	step[count] = mic.getLevel() * maxDiam;
-	sonograma();
-	count = (count + 1) % steps;
+	// step[count] = mic.getLevel() * maxDiam;
+	// sonograma();
+	// count = (count + 1) % steps;
+	pelotita();
 }
 
 function sonograma(){
