@@ -12,15 +12,13 @@ var maxDiam;
 var spaceY;
 
 function setup(){
-	
 	createCanvas(40, displayHeight);
-	//canvas.class("snd");
+	noStroke();
+	fill(255, 200);
 	mic = new p5.AudioIn()
 	mic.start();
-	
-	maxDiam = width * .8;
+	maxDiam = width * .99;
 	spaceY = height / (steps + 1);
-
 	for(var i = 0; i < steps; i++){
 		step[i] = 0;
 	}

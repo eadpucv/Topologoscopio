@@ -20,7 +20,7 @@ body{
     overflow: hidden;
     padding: 1em;
     background-color: #000;
-    color: #d4d6d3;
+    color: #FFF;
 }
 
 #speech-container{
@@ -29,12 +29,13 @@ body{
 }
 
 #speech{
-    color: #FFF;
+    
 }
 
 #intermediate{
     position: absolute;
     bottom: 1em;
+    color: #DBCAB4;
 }
 
 #darken-overlay{
@@ -62,6 +63,6 @@ body{
     z-index: 200;
 }
 
-h1{
+h1, h4{
     font-weight: 300;
 }
