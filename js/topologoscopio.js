@@ -35,7 +35,7 @@
             
             if(isFinal){
             var d = document.getElementById("speech");
-                d.textContent += " ~ "+transcript;
+                d.textContent += " · "+transcript;
                 d = document.getElementById("intermediate");
                 d.textContent = " ";
                 x = "true";
