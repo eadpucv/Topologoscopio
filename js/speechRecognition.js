@@ -18,18 +18,22 @@ recognition.onresult = function(event) {
     // Obtén el resultado a partir del objeto generado por la API
     var transcript = event.results[event.results.length-1][0].transcript;
     var isFinal = event.results[event.results.length-1].isFinal;
-    var x;
     
     if(isFinal){
     var d = document.getElementById("speech");
         d.textContent += " · "+transcript;
         d = document.getElementById("intermediate");
-        d.textContent = " ";
-        x = "true";
+        d.textContent = "";
+        /*
+        
+        query("INSERT INTO speech(utterance) VALUES('"+transcript+"')");
+
+        */
+        
     }else{
     var d = document.getElementById("intermediate");
         d.textContent = transcript;
-        x = "false";
+        
     }
 
     var newTranscript = transcript + "+" + x;
