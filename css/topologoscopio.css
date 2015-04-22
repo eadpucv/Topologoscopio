@@ -1,0 +1,36 @@
+/*
+    
+    Topo·logo·scopio
+    @hspencer
+
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+
+html{
+    font-family: Oswald;
+    font-size: 2.5em;
+}
+
+body{
+    padding: 1em;
+    background-color: #000;
+    color: #d4d6d3;
+}
+#intermediate{
+    position: absolute;
+    bottom: 2em;
+    font-weight: 300;
+}
+#speech-container{
+    display: table-cell;
+    vertical-align: text-bottom;
+    position: absolute;
+    bottom: 4em;
+    font-weight: 400;
+    overflow: hidden;
+}
+
+#speech{
+	color: #FFF;
+}

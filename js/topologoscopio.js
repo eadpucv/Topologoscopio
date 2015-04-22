@@ -1,10 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<!-- para evitar tener que dar acceso al micrófono de forma contínua se recomienda correr esta página bajo HTTPS -->
-    <script type="text/javascript">
-
-        // Necesitamos asegurarnos que el navegador utilice Websocket
+// Necesitamos asegurarnos que el navegador utilice Websocket
 
         if ("WebSocket" in window) {
 
@@ -65,32 +59,3 @@
         // Comienza a reconocer
         // recognition.lang = 'ES';
         recognition.start();
-
-</script>
-
-<style type="text/css">
-    body{
-        font-family: "Helvetica Neue", Helvetica;
-        padding: 1em;
-        
-        background-color: #364464;
-    }
-    #intermediate{
-        color: #E2FFFD;
-        font-size: .9em;
-        font-weight: bold;
-    }
-
-    #speech{		
-    	font-size: 1.5em;
-        font-weight: lighter;
-        text-shadow: 1px 1px 1px #222C41;
-        color: #D9F7F5;
-    }
-</style>
-</head>
-<body>
-<div id='intermediate'></div>
-<div id='speech'></div>
-</body>
-</html>
