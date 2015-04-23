@@ -14,7 +14,6 @@ var spaceY;
 function setup(){
 	createCanvas(40, displayHeight);
 	noStroke();
-	fill(221, 213, 178, 120);
 	mic = new p5.AudioIn()
 	mic.start();
 	maxDiam = width * 1.33;
@@ -22,6 +21,8 @@ function setup(){
 	for(var i = 0; i < steps; i++){
 		step[i] = 0;
 	}
+	ellipseMode(CENTER);
+	rectMode(CENTER);
 }
 
 function draw(){
@@ -33,9 +34,12 @@ function draw(){
 }
 
 function sonograma(){
+	fill(221, 213, 178, 120);
 	for(var i = 0; i < steps; i++){
-		ellipse(width/2, height - (i*spaceY), step[i], step[i]);
+		ellipse(width/2, height - (i * spaceY), step[i], step[i]);
 	}
+	fill(255);
+	rect(width/2, height - (count * spaceY), width * .5, 2);
 }
 
 function pelotita(){
