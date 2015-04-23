@@ -47,4 +47,4 @@ Los croquis muestran el espacio publico en Valparaiso. Miradas diversas que se d
 Topo·logo·scopio es un espacio leve que vincula lugar y palabra, revelando en sus límites y en su  posibilidad de detención, una cualidad propia de los espacios públicos espontáneos de los cerros de Valparaíso, que es el hacer aparecer el aquí y el allá, una conjunción de proximidad y lejanía, ante y dentro de la cual se puede dialogar.La lejanía irrumpe arrojando la palabra de un aquí a un allá.
 
 ### Agradecimientos especiales
-- A los estudiantes de arquitectura '''Sebastian Ginsberg e Ignacio Favilla.
+- A los estudiantes de arquitectura __Sebastian Ginsberg__ e __Ignacio Favilla__.
