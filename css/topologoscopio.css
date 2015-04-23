@@ -5,36 +5,39 @@
 
 */
 
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 
 html{
-    font-family: Oswald;
+    font-family: Oswald, "Roboto Condensed";
     font-size: 3em;
-    line-height: 95%;
-    font-weight: 300;
+    line-height: 100%;
+    font-weight: 400;
 }
 
 body{
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: text-bottom;
     overflow: hidden;
     padding: 1em;
     background-color: #000;
-    color: #d4d6d3;
+    color: #FFF;
 }
 
 #speech-container{
     position: absolute;
-    bottom: 2em;
+    bottom: 1em;
 }
 
-#speech{
-    color: #FFF;
+#speech span{
+    margin-right: 1ex;
+    font-weight: 300;
 }
 
 #intermediate{
-    position: absolute;
-    bottom: 1em;
+    color: #ddd5b2;
+    font-weight: 400;
 }
 
 #darken-overlay{
@@ -54,13 +57,14 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
 }
 
-#defaultCanvas{
+#defaultCanvas,
+.snd{
     position: absolute;
     left: 0;
     bottom: 0;
     z-index: 200;
 }
 
-h1{
-    font-weight: 300;
-}
+h1{font-weight: 400}
+h4{font-weight: 300}
+

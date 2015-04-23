@@ -20,29 +20,40 @@ recognition.onresult = function(event) {
     var isFinal = event.results[event.results.length-1].isFinal;
     
     if(isFinal){
-    var d = document.getElementById("speech");
-        d.textContent += " · "+transcript;
-        d = document.getElementById("intermediate");
-        d.textContent = "";
-        /*
-        
-        query("INSERT INTO speech(utterance) VALUES('"+transcript+"')");
+        var d = document.getElementById("speech");
 
-        */
+        var node = document.createElement("span");                 
+        var textnode = document.createTextNode(transcript);         
+        node.appendChild(textnode);                             
+        d.appendChild(node); 
+        
+        var interim = document.getElementById("intermediate");
+        interim.textContent = "";
+
+        $.ajax({
+            url: 'db.php', // llamamos al php
+            type: 'GET',
+            data: {data: transcript}, // le enviamos la data en un objeto javascript
+        })
+
+        .done(function(data) {
+            if (data) //si el resultado es 1 entonces se insertó
+                console.log("db.php -> "+data);
+        })
         
     }else{
-    var d = document.getElementById("intermediate");
-        d.textContent = transcript;
+        var interim = document.getElementById("intermediate");
+        interim.textContent = transcript;
         
     }
-
-    var newTranscript = transcript + "+" + x;
-    // ws.send(newTranscript);
 }
 
+/*
 recognition.onerror = function(event) { 
     recognition.start();
 }
+*/
+
 recognition.onend = function(event){
     recognition.start();
 }
