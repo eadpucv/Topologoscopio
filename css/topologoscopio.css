@@ -5,13 +5,15 @@
 
 */
 
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 
 html{
-    font-family: Oswald;
+    font-family: Oswald, "Roboto Condensed";
     font-size: 3em;
-    line-height: 95%;
-    font-weight: 300;
+    line-height: 100%;
+    font-weight: 400;
 }
 
 body{
@@ -25,17 +27,17 @@ body{
 
 #speech-container{
     position: absolute;
-    bottom: 2.5em;
+    bottom: 1em;
 }
 
 #speech span{
     margin-right: 1ex;
+    font-weight: 300;
 }
 
 #intermediate{
-    position: absolute;
-    bottom: 1.5em;
     color: #ddd5b2;
+    font-weight: 400;
 }
 
 #darken-overlay{
@@ -63,6 +65,5 @@ body{
     z-index: 200;
 }
 
-h1, h4{
-    font-weight: 300;
-}
+h1{font-weight: 400}
+h4{font-weight: 300}

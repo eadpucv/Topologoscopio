@@ -29,16 +29,16 @@ recognition.onresult = function(event) {
         
         var interim = document.getElementById("intermediate");
         interim.textContent = "";
-        
+
         $.ajax({
             url: 'db.php', // llamamos al php
-            type: 'POST',
+            type: 'GET',
             data: {data: transcript}, // le enviamos la data en un objeto javascript
         })
 
         .done(function(data) {
             if (data) //si el resultado es 1 entonces se insertó
-                console.log("Insertado");
+                console.log("db.php -> "+data);
         })
         
     }else{
@@ -48,9 +48,12 @@ recognition.onresult = function(event) {
     }
 }
 
+/*
 recognition.onerror = function(event) { 
     recognition.start();
 }
+*/
+
 recognition.onend = function(event){
     recognition.start();
 }
