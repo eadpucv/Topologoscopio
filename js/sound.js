@@ -5,7 +5,7 @@
 */
 
 var mic;
-var steps = 200;
+var steps = 400;
 var step = [];
 var count = 0;
 var maxDiam;
@@ -18,6 +18,7 @@ function setup(){
 	mic.start();
 	maxDiam = width * 1.33;
 	spaceY = height / (steps + 1);
+	// reset all sonogram values
 	for(var i = 0; i < steps; i++){
 		step[i] = 0;
 	}
@@ -34,12 +35,21 @@ function draw(){
 }
 
 function sonograma(){
-	fill(221, 213, 178, 120);
+
+	// sonograma
+	beginShape();
+	fill(230, 100, 70);
 	for(var i = 0; i < steps; i++){
-		ellipse(width/2, height - (i * spaceY), step[i], step[i]);
+		vertex(width/2 - step[i]/2, height - (i * spaceY));
 	}
+	for(var i = steps-1; i >= 0; i--){
+		vertex(width/2 + step[i]/2, height - (i * spaceY));
+	}
+	endShape();
+
+	// cabezal
 	fill(255);
-	rect(width/2, height - (count * spaceY), width * .5, 2);
+	rect(width/2, height - (count * spaceY) - 3, width * .8, 4);
 }
 
 function pelotita(){
