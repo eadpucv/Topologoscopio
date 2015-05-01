@@ -36,8 +36,8 @@ body{
 }
 
 #intermediate{
-    color: #ddd5b2;
-    font-weight: 400;
+    color: rgb(230, 100, 70);
+    font-weight: 300;
 }
 
 #darken-overlay{
