@@ -4,7 +4,6 @@ $stringData = $data . '';
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$port = "3306";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=topologoscopio", $username, $password);
