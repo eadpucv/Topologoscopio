@@ -1,4 +1,3 @@
-
 // Reconocimiento de voz
 // Sólo soportado por Google Chrome
 // Una vez que comienza, debes autorizar el acceso al micrófono
@@ -21,7 +20,6 @@ recognition.onresult = function(event) {
     
     if(isFinal){
         var d = document.getElementById("speech");
-
         var node = document.createElement("span");                 
         var textnode = document.createTextNode(transcript);         
         node.appendChild(textnode);                             
