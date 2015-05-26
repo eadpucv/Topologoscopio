@@ -181,7 +181,7 @@ master = function () {
     this.limiter.threshold.value = 0;
     this.limiter.ratio.value = 100;
     this.audiocontext = audiocontext;
-    this.output.disconnect(this.audiocontext.destination);
+    // this.output.disconnect(this.audiocontext.destination);
     // an array of input sources
     this.inputSources = [];
     // connect input to limiter
